@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ovadia Technologies Binary Calendar</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.dot {
+			width: 50px;
+			height: 50px;
+			border-radius: 10px;
+			margin-top: 4px;
+			box-shadow: inset 0px 0px 7px 3px grey, 0 0 20px 2px grey;
+			
+		}
+
+		.on {
+			background-color: lime;
+			box-shadow: inset 0px 0px 7px 3px grey, 0 0 20px 2px lawngreen;
+		}
+
+		#d1, #d2, 
+		#mo1, #mo2, 
+		#y1, #y2 {
+			display: inline-table;
+		}
+		.dys,.mnt,.yrs {
+			width: 100px;
+			height: 25px;
+			display: inline-block;
+			margin-top: 5px;
+			line-height: 25px;
+		    text-align: center;
+		    font-size: large;
+		    color: limegreen;
+		    font-weight: bold;
+			box-shadow: inset 0px 0px 7px 3px grey, 0 0 20px 2px grey;
+			padding: 2px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			border-radius: 10px;
+			text-shadow: -1px 1px 0px grey;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+		    $(function() {
+		        setInterval(function() {
+		            var d = new Date();
+		            var day = d.getDate();
+		            var mon = d.getMonth()+1;
+		            var yrs = d.getFullYear();
+
+		            var d = day.toString().split('');
+		            var mo = mon.toString().split('');
+		            var y = yrs.toString().split('');
+
+		            var binary = {
+		                '0': [0,0,0,0],
+		                '1': [0,0,0,1],
+		                '2': [0,0,1,0],
+		                '3': [0,0,1,1],
+		                '4': [0,1,0,0],
+		                '5': [0,1,0,1],
+		                '6': [0,1,1,0],
+		                '7': [0,1,1,1],
+		                '8': [1,0,0,0],
+		                '9': [1,0,0,1]
+		            }
+		   
+		            for (i in binary[d[0]]) { 
+		                if(binary[d[0]][i] == 1){
+		                    $("#d1dot"+i.toString()).addClass("on");   
+		                } else {
+		                    $("#d1dot"+i.toString()).removeClass("on");  
+		                }
+		            }
+		            for (i in binary[d[1]]) { 
+		                if(binary[d[1]][i] == 1){
+		                    $("#ddot"+i.toString()).addClass("on");   
+		                } else {
+		                    $("#ddot"+i.toString()).removeClass("on");  
+		                }
+		            }
+		            for (i in binary[mo[0]]) { 
+		                if(binary[mo[0]][i] == 1){
+		                    $("#modot"+i.toString()).addClass("on");   
+		                } else {
+		                    $("#modot"+i.toString()).removeClass("on");  
+		                }
+		            }
+		            for (i in binary[mo[1]]) { 
+		                if(binary[mo[1]][i] == 1){
+		                    $("#mo1dot"+i.toString()).addClass("on");   
+		                } else {
+		                    $("#mo1dot"+i.toString()).removeClass("on");  
+		                }
+		            }
+		            for (i in binary[y[2]]) { 
+		                if(binary[y[2]][i] == 1){
+		                    $("#y1dot"+i.toString()).addClass("on");   
+		                } else {
+		                    $("#y1dot"+i.toString()).removeClass("on");  
+		                }
+		            }
+		            for (i in binary[y[3]]) { 
+		                if(binary[y[3]][i] == 1){
+		                    $("#ydot"+i.toString()).addClass("on");   
+		                } else {
+		                    $("#ydot"+i.toString()).removeClass("on");  
+		                }
+		            }
+
+		        }, 200);
+		    });
+
+		});
+	</script>
+</head>
+<body>
+	<div class="calendar">
+		<div id="d1">
+			<div id="d1dot2" class="dot"></div>
+			<div id="d1dot3" class="dot"></div>
+		</div>
+		<div id="d2">
+			<div id="ddot0" class="dot"></div>
+			<div id="ddot1" class="dot"></div>
+			<div id="ddot2" class="dot"></div>
+			<div id="ddot3" class="dot"></div>
+		</div>
+		<div id="mo1">
+			<div id="mo1dot2" class="dot"></div>
+			<div id="mo1dot3" class="dot"></div>
+		</div>
+		<div id="mo2">
+			<div id="modot0" class="dot"></div>
+			<div id="modot1" class="dot"></div>
+			<div id="modot2" class="dot"></div>
+			<div id="modot3" class="dot"></div>
+		</div>
+		<div id="y1">
+			<div id="y1dot0" class="dot"></div>
+			<div id="y1dot1" class="dot"></div>
+			<div id="y1dot2" class="dot"></div>
+			<div id="y1dot3" class="dot"></div>
+		</div>
+		<div id="y2">
+			<div id="ydot0" class="dot"></div>
+			<div id="ydot1" class="dot"></div>
+			<div id="ydot2" class="dot"></div>
+			<div id="ydot3" class="dot"></div>
+		</div>
+		<div class="indication">
+			<div class="dys">Days</div>
+			<div class="mnt">Months</div>
+			<div class="yrs">Years</div>
+		</div>
+	</div>
+</body>
+</html>
